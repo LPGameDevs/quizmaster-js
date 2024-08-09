@@ -1,9 +1,9 @@
-import comments from './comments.json'
+import quiz from './quiz.json'
 
 const response = (req, res) => {
     switch (req.method) {
         case 'GET':
-            res.status(200).json(comments)
+            res.status(200).json(quiz)
             break;
 
         default: //Method Not Allowed

@@ -1,3 +1,4 @@
+// configuration file for ps2
 module.exports = {
   apps : [
     {
