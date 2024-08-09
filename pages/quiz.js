@@ -1,7 +1,10 @@
 // pages/quiz.js
 import {useState, useEffect} from 'react';
+import {useRouter} from "next/router";
 
 export default function Quiz() {
+  const router = useRouter();
+
   const [quizData, setQuizData] = useState(null);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [isCorrect, setIsCorrect] = useState(null);
@@ -24,6 +27,10 @@ export default function Quiz() {
 
   const currentQuestion = quizData[currentQuestionIndex];
 
+  const handleExit = () => {
+    router.push('/'); // Navigate to the desired route
+  };
+
   const handleAnswerClick = (answer) => {
     setSelectedAnswer(answer);
     setHasAnswered(true);
@@ -45,28 +52,43 @@ export default function Quiz() {
     }
   };
 
+  // Button classes
+  const defaultClasses = 'py-2 px-4 rounded text-white';
+  const buttonClasses = `${defaultClasses} bg-blue-500`;
+  const rightClasses = `${defaultClasses} bg-green-500`;
+  const wrongClasses = `${defaultClasses} bg-red-500`;
+
   return (
     <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-xl">
       <h1 className="text-xl font-bold mb-4">{currentQuestion.question}</h1>
       <div className="grid grid-cols-2 gap-4">
         {currentQuestion.incorrectAnswers.concat(currentQuestion.correctAnswer).sort().map((answer, index) => (
+
           <button
             key={index}
-            className={`py-2 px-4 rounded text-white ${
-              hasAnswered ? (answer == currentQuestion.correctAnswer ? ('bg-green-400') : (selectedAnswer === answer ? 'bg-red-400' : 'bg-blue-500')) : 'bg-blue-500' 
-               
-            }`}
+            className={
+              hasAnswered ? (answer === currentQuestion.correctAnswer ? (rightClasses) : (selectedAnswer === answer ? wrongClasses : buttonClasses)) : buttonClasses
+            }
             onClick={() => handleAnswerClick(answer)}
             disabled={!!selectedAnswer}
           >
             {answer}
           </button>
+
         ))}
       </div>
       {feedback && <p className="mt-4 text-lg">{feedback}</p>}
+
+      <button
+        className="mt-4 bg-blue-700 text-white py-2 px-4 rounded"
+        onClick={handleExit}
+      >
+        Exit
+      </button>
+
       {selectedAnswer && (
         <button
-          className="mt-4 bg-green-500 text-white py-2 px-4 rounded"
+          className="mt-4 bg-gray-100 border-2 border-blue-700 text-blue-700 ml-2 py-2 px-4 rounded hover:bg-blue-500 hover:text-white"
           onClick={handleNextQuestion}
         >
           Next Question
