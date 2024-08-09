@@ -1,0 +1,17 @@
+[
+  {
+    "username": "Ninja",
+    "icon": "https://static-cdn.jtvnw.net/jtv_user_pictures/6cd4de40-1a83-46c7-aea5-3bd73f90e7e4-profile_image-70x70.png",
+    "live": true
+  },
+  {
+    "username": "Shroud",
+    "icon": "https://static-cdn.jtvnw.net/jtv_user_pictures/6cd4de40-1a83-46c7-aea5-3bd73f90e7e4-profile_image-70x70.png",
+    "live": false
+  },
+  {
+    "username": "Pokimane",
+    "icon": "https://static-cdn.jtvnw.net/jtv_user_pictures/6cd4de40-1a83-46c7-aea5-3bd73f90e7e4-profile_image-70x70.png",
+    "live": true
+  }
+]

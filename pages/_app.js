@@ -1,13 +1,16 @@
 // pages/_app.js
 import '../styles/globals.css';
 import Layout from "../components/layout";
+import {NotificationProvider} from '../contexts/notification';
 
-function MyApp({ Component, pageProps }) {
+function MyApp({Component, pageProps}) {
   return (
-    <Layout>
-      <Component {...pageProps} />
-    </Layout>
-    )
+    <NotificationProvider>
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
+    </NotificationProvider>
+  )
 
 }
 
