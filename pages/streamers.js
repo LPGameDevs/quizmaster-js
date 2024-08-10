@@ -1,5 +1,5 @@
 // pages/streamers.js
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 
 export default function Streamers() {
 

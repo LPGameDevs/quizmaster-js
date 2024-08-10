@@ -12,3 +12,5 @@
 ### Notes
 
 - ddev setup following this [blog](https://www.lullabot.com/articles/nodejs-development-ddev)
+- Using [twurple](https://twurple.js.org/docs/auth/providers/refreshing.html) as twitch integration.
+- Server is located at https://quiz.trygamedev.com.

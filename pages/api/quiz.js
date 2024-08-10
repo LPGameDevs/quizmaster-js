@@ -1,9 +1,9 @@
-import quiz from './quiz.json'
-
-const response = (req, res) => {
+const response = async (req, res) => {
     switch (req.method) {
         case 'GET':
-            res.status(200).json(quiz)
+            const response = await fetch('https://quiz.trygamedev.com/api/quiz.json');
+            const data = await response.json();
+            res.status(200).json(data)
             break;
 
         default: //Method Not Allowed
