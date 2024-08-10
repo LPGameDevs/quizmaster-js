@@ -1,5 +1,4 @@
 import {getApiClient, getAuthProvider} from '../../../utils/twitchAuth';
-import quiz from "../quiz.json";
 
 export default async function handler(req, res) {
   // const authProvider = getAuthProvider();
