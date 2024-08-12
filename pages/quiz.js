@@ -1,10 +1,13 @@
 // pages/quiz.js
 import {useState, useEffect} from 'react';
 import {useRouter} from "next/router";
+import CountdownTimer from "../components/countdown";
 
 export default function Quiz() {
   const router = useRouter();
 
+  const [timerCancelled, setTimerCancelled] = useState(false);
+  const [timerReset, setTimerReset] = useState(false);
   const [quizData, setQuizData] = useState(null);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [isCorrect, setIsCorrect] = useState(null);
@@ -41,7 +44,13 @@ export default function Quiz() {
     }
   };
 
+  const timerComplete = () => {
+    console.log('parent done')
+  }
+
   const handleNextQuestion = () => {
+    setTimerCancelled(false);
+    setTimerReset(true);
     setHasAnswered(false);
     setSelectedAnswer('');
     setFeedback('');
@@ -60,6 +69,7 @@ export default function Quiz() {
 
   return (
     <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-xl">
+      <CountdownTimer onComplete={timerComplete} cancelled={timerCancelled} reset={timerReset}/>
       <h1 className="text-xl font-bold mb-4">{currentQuestion.question}</h1>
       <div className="grid grid-cols-2 gap-4">
         {currentQuestion.incorrectAnswers.concat(currentQuestion.correctAnswer).sort().map((answer, index) => (
