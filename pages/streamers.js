@@ -11,9 +11,9 @@ export default function Streamers() {
         const mappedData = data.map(stream => {
             return {
                 username: stream.username ?? stream.userName ?? 'uberguy',
-                icon: stream.icon ?? 'https://static-cdn.jtvnw.net/jtv_user_pictures/6cd4de40-1a83-46c7-aea5-3bd73f90e7e4-profile_image-70x70.png',
+                icon: stream.thumbnail ?? stream.icon ?? 'https://static-cdn.jtvnw.net/jtv_user_pictures/6cd4de40-1a83-46c7-aea5-3bd73f90e7e4-profile_image-70x70.png',
                 live: stream.live ?? true,
-                game: stream.gameName ?? 'Somegame',
+                game: stream.gameName ?? 'Some game',
                 viewers: stream.viewers ?? 0,
             }
         });

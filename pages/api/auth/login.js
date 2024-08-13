@@ -27,7 +27,7 @@ export default async function handler(req, res) {
       title: item.title,
       userName: item.userName,
       viewers: item.viewers,
-      thumbnail: item.getThumbnailUrl(10, 10),
+      thumbnail: item.getThumbnailUrl(64, 64),
     }
   }
 ));

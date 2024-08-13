@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
 
-export default function CountdownTimer({ initialSeconds = 5, onComplete, cancelled = false }) {
+export default function CountdownTimer({ showTimer = false, initialSeconds = 5, onComplete}) {
     const [secondsRemaining, setSecondsRemaining] = useState(initialSeconds);
     const [isComplete, setIsComplete] = useState(false);
     // const [percentage, setPercentage] = useState(100);
 
     useEffect(() => {
-        console.log(secondsRemaining)
         if (secondsRemaining > 0) {
             const timerId = setInterval(() => {
                 setSecondsRemaining((prev) => prev - 1);
@@ -16,14 +15,26 @@ export default function CountdownTimer({ initialSeconds = 5, onComplete, cancell
         } else if (onComplete) {
             endTimer(); // Trigger the onComplete callback if provided
         }
-    }, [secondsRemaining, onComplete]);
+    }, [secondsRemaining]);
+
+    useEffect(() => {
+        // Unhiding should restart the count.
+        if (showTimer) {
+            resetTimer()
+        }
+    }, [showTimer]);
 
     function endTimer() {
         setIsComplete(true);
         onComplete();
     }
 
-    if (cancelled) {
+    function resetTimer() {
+        setIsComplete(false);
+        setSecondsRemaining(initialSeconds);
+    }
+
+    if (!showTimer) {
         return;
     }
 
@@ -32,8 +43,6 @@ export default function CountdownTimer({ initialSeconds = 5, onComplete, cancell
     const circumference = 2 * Math.PI * radius; // Circumference of the circle
     const percentage = secondsRemaining !== initialSeconds ? (((secondsRemaining - 1) / initialSeconds) * 100) : 100;
     const dashArray = `${(percentage / 100) * circumference} ${circumference}`;
-
-    console.log(percentage);
 
     return (
         <div className="flex flex-col items-center">
@@ -65,7 +74,7 @@ export default function CountdownTimer({ initialSeconds = 5, onComplete, cancell
                                 r={radius}
                                 cx="50%"
                                 cy="50%"
-                                style={{transition: 'stroke-dasharray 1s linear'}}
+                                style={initialSeconds === secondsRemaining ? {} : {transition: 'stroke-dasharray 1s linear'}}
                             />
                         </svg>
                         <div
